@@ -76,6 +76,22 @@ public class UserResource {
         return "staff";
     }
 
+    @GetMapping("/administration/staff/{id}/edit")
+    private String getAdministrationEditStaff(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("staff", mapperFacade.map(userService.getById(id), UserDto.class));
+        return "editStaff";
+    }
+
+    @PostMapping("/administration/staff/{id}/edit")
+    private String editUser(@ModelAttribute("user") UserDto userDto) {
+        try {
+            userService.update(mapperFacade.map(userDto, User.class));
+        } catch (Exception e) {
+            return "redirect:/administration/staff?error";
+        }
+        return "redirect:/administration/staff";
+    }
+
     @DeleteMapping("/administration/users/{id}")
     private void deleteUser(@PathVariable("id") Long id) {
         userService.delete(id);

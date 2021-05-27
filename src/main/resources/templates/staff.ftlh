@@ -21,6 +21,7 @@
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-outline-danger" onclick="deleteUser(${user.id})">Удалить</button>
+                                <a class="btn btn-outline-warning" href="/administration/staff/${user.id}/edit">Редактировать</a>
                             </div>
                         </div>
                     </#list>
@@ -36,6 +37,11 @@
                 .then(response => {
                     window.location.replace("http://localhost:8585/administration/staff");
                 });
+        }
+    </script>
+    <script type="text/javascript">
+        if (window.location.href.includes("error")) {
+            alert("Данное имя пользователя уже занято");
         }
     </script>
 
